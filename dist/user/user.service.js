@@ -8,6 +8,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
@@ -16,34 +25,44 @@ let UserService = exports.UserService = class UserService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async create(createUserDto) {
-        return await this.prisma.user.create({
-            data: createUserDto,
+    create(createUserDto) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.prisma.user.create({
+                data: createUserDto,
+            });
         });
     }
-    async findAll() {
-        return await this.prisma.user.findMany();
-    }
-    async findOne(id) {
-        return await this.prisma.user.findFirst({
-            where: {
-                id: id,
-            },
+    findAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.prisma.user.findMany();
         });
     }
-    async update(id, updateUserDto) {
-        return await this.prisma.user.update({
-            where: {
-                id: id,
-            },
-            data: updateUserDto,
+    findOne(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.prisma.user.findFirst({
+                where: {
+                    id: id,
+                },
+            });
         });
     }
-    async remove(id) {
-        return await this.prisma.user.delete({
-            where: {
-                id: id,
-            },
+    update(id, updateUserDto) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.prisma.user.update({
+                where: {
+                    id: id,
+                },
+                data: updateUserDto,
+            });
+        });
+    }
+    remove(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.prisma.user.delete({
+                where: {
+                    id: id,
+                },
+            });
         });
     }
 };
